@@ -8,9 +8,9 @@ import { Message } from 'src/app/messages/message.model'
 })
 export class MessageListComponent implements OnInit { 
   messages: Message[] = [
-    new Message(1, 'New Message', 'Hello!', 'Shae'),
-    new Message(2, 'Another New Message', 'Hello there!', 'Shae'),
-    new Message(3, 'Third New Message', 'Hello world!', 'Shae')
+    new Message('1', 'New Message', 'Hello!', 'Shae'),
+    new Message('2', 'Another New Message', 'Hello there!', 'Shae'),
+    new Message('3', 'Third New Message', 'Hello world!', 'Shae')
     ];
 
   constructor() { }
