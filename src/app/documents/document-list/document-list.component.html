@@ -1,41 +1,16 @@
-<!-- <div class="panel panel-default">
-  <div class="panel-heading">
-    <div class="row pad-left-right">
-      <div class="col-md-12">
-
-      <span class="pull-left title col-md-6">Documents</span>
-      </div>
-      
-      <button class="btn btn-success pull-right col-md-6">Add Document</button>
-  
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="center-panel">
-      <div class="col-xs-12">
-      <app-document-item
-      *ngFor="let documentEl of documents"
-      [document]="documentEl"
-      (documentSelected)="onSelectedDocument(documentEl)"
-      ></app-document-item>
-    </div>
-  </div>
-  </div> -->
-
-<!-- </div> -->
 <div class="container"></div>
 <div class="panel panel-default">
   <div class="panel-heading col-md-12">
       <span class="pull-left title col-md-6">Documents</span>
-      <button class="btn btn-success pull-right col-md-6">Add Document</button>
+      <a routerLink="new"><button class="btn btn-success pull-right col-md-6" (click)="onNewDocument()"> Add Document</button></a>
   </div>
   <div class="panel-body">
     <div class="center-panel">
       <div class="col-xs-12">
       <app-document-item
-      *ngFor="let documentEl of documents"
+      *ngFor="let documentEl of documents, let i = id"
       [document]="documentEl"
-      (documentSelected)="onSelectedDocument(documentEl)"
+      [id] = "i"
       ></app-document-item>
     </div>
   </div>

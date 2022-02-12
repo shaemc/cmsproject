@@ -20,7 +20,7 @@ export class MessageService {
       this.messageChangedEvent.emit(this.messages.slice());
   }
 
-  getMessages() {
+  getMessages(): Message[] {
     return this.messages.slice();
   }
 
