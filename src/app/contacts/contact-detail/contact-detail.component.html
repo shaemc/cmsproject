@@ -10,16 +10,12 @@
             <h1>{{ contact.name }}</h1>
             <img src="{{ contact.imageUrl }}">
             <div class="btn-group pull-right">
-            <button 
-            type="button" 
-            class="btn btn-primary">
+            <a class="btn btn-primary" [routerLink]="['edit']">
             Edit
-        </button>
-        <button 
-            type="button" 
-            class="btn btn-danger">
+            </a>
+        <a class="btn btn-danger" (click)="onDelete()">
             Delete
-        </button>
+        </a>
         </div>
         </div>
     </div>

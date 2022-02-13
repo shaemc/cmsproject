@@ -2,15 +2,14 @@
 <div class="panel panel-default">
   <div class="panel-heading col-md-12">
       <span class="pull-left title col-md-6">Documents</span>
-      <a routerLink="new"><button class="btn btn-success pull-right col-md-6" (click)="onNewDocument()"> Add Document</button></a>
+      <a [routerLink]="['new']"><button class="btn btn-success pull-right col-md-6" (click)="onNewDocument()"> Add Document</button></a>
   </div>
   <div class="panel-body">
     <div class="center-panel">
       <div class="col-xs-12">
       <app-document-item
-      *ngFor="let documentEl of documents, let i = id"
+      *ngFor="let documentEl of documents"
       [document]="documentEl"
-      [id] = "i"
       ></app-document-item>
     </div>
   </div>
