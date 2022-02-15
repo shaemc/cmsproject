@@ -10,7 +10,7 @@ import { EventEmitter } from "@angular/core";
 export class DocumentService{
     private documents: Document[] = [];
       
-    documentSelectedEvent = new EventEmitter<Document>();
+    // documentSelectedEvent = new EventEmitter<Document>();
     documentChangedEvent = new EventEmitter<Document[]>();
     
     constructor() {
@@ -22,7 +22,7 @@ export class DocumentService{
     }
     
     getDocument(id: string): Document {
-        return this.documents[id];     
+        return this.documents.find((document) => document.id === id);     
         }
 
     deleteDocument(document: Document) {
