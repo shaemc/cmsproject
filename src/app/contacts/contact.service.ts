@@ -39,7 +39,7 @@ export class ContactService {
     this.contactListChangedEvent.next(this.contacts.slice());
  }
 
- addConact(newContact: Contact) {
+ addContact(newContact: Contact) {
   if (!newContact) {
       return;
   }
