@@ -26,7 +26,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
   
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscription.unsubscribe();   
    }
 }

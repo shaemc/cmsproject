@@ -48,7 +48,7 @@ export class DocumentEditComponent implements OnInit {
       value.name,
       value.description,
       value.url,
-      
+      null
     );
     if (this.editMode) {
       this.documentService.updateDocument(this.originalDocument, newDocument);
