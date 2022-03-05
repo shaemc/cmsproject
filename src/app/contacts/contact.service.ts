@@ -2,25 +2,46 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Subject } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ContactService {
-  private contacts: Contact[] = [];
-
-  // contactSelectedEvent = new EventEmitter<Contact>();
+  contacts: Contact[] = [];
   contactListChangedEvent = new Subject<Contact[]>();
   maxContactId: number;
 
-
-  constructor() {
-    this.contacts = MOCKCONTACTS;
+  constructor(private http: HttpClient) {
+    // this.contacts = MOCKCONTACTS;
   }
 
   getContacts() {
-    return this.contacts.slice();
+    return this.http
+    .get(
+        'https://wdd430-winter2022-7137c-default-rtdb.firebaseio.com/contacts.json'
+        )
+    .subscribe(
+    // success method
+    (contacts: Contact[]) => {
+       this.contacts = contacts;
+       this.maxContactId = this.getMaxId();
+
+       this.contacts.sort((a, b) =>
+       a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+       );
+
+       this.contactListChangedEvent.next(this.contacts.slice());
+    },
+    // error method
+    (error: any) => {
+       console.log(error)
+    }
+    );
+
+    // return this.contacts.slice();
   }
 
   getContact(id: string): Contact {
@@ -36,7 +57,9 @@ export class ContactService {
        return;
     }
     this.contacts.splice(pos, 1);
+
     this.contactListChangedEvent.next(this.contacts.slice());
+    this.storeContact();
  }
 
  addContact(newContact: Contact) {
@@ -52,7 +75,26 @@ export class ContactService {
   
   const contactsListClone = this.contacts.slice();
 
-  this.contactListChangedEvent.next(contactsListClone);
+  this.storeContact()
+  // this.contactListChangedEvent.next(contactsListClone);
+}
+
+storeContact() {
+  let contacts = JSON.stringify(this.contacts);
+
+  const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+  this.http
+  .put(
+      'https://wdd430-winter2022-7137c-default-rtdb.firebaseio.com/contacts.json',
+      contacts,
+      {
+          headers: headers,
+      }
+  )
+  .subscribe(() => {
+      this.contactListChangedEvent.next(this.contacts.slice());
+  });
 }
 
 updateContact(originalContact: Contact, newContact: Contact){
@@ -72,7 +114,8 @@ updateContact(originalContact: Contact, newContact: Contact){
 
   const contactsListClone = this.contacts.slice();
 
-  this.contactListChangedEvent.next(contactsListClone);
+  this.storeContact();
+  // this.contactListChangedEvent.next(contactsListClone);
 }
 
 getMaxId(): number {
