@@ -28,9 +28,12 @@ export class ContactEditComponent implements OnInit {
            this.editMode = false;
            return;
          }
-         this.originalContact = this.contactService.getContact(this.id);
-    
-         if (!this.originalContact){
+         this.contactService.getContact(this.id)
+         .subscribe(contactData => {
+
+           this.originalContact = contactData.contact;
+
+           if (!this.originalContact){
            return;
          }
            this.editMode = true;
@@ -40,6 +43,9 @@ export class ContactEditComponent implements OnInit {
                JSON.stringify(this.originalContact.group)
              )
            }
+         });
+    
+         
     }) 
   }
 
@@ -85,6 +91,7 @@ export class ContactEditComponent implements OnInit {
     const value = form.value;
     const newContact = new Contact(
       '',
+      value.id,
       value.name,
       value.email,
       value.phone,

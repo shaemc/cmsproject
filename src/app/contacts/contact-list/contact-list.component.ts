@@ -9,7 +9,7 @@ import { ContactService } from '../contact.service';
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css']
 })
-export class ContactListComponent implements OnInit, OnDestroy {
+export class ContactListComponent implements OnInit{ //, OnDestroy {
   contacts: Contact[] = [];
   subscription: Subscription;
   term: string;
@@ -27,9 +27,9 @@ export class ContactListComponent implements OnInit, OnDestroy {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
   
-  ngOnDestroy() {
-    this.subscription.unsubscribe();   
-   }
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();   
+  //  }
    
   search(value: string) {
 

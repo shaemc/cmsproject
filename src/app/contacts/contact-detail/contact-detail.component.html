@@ -7,8 +7,8 @@
 <div class="panel-header">
     <div class="row">
         <div class="col-xs-12">
-            <h1>{{ contact.name }}</h1>
-            <img src="{{ contact.imageUrl }}">
+            <h1>{{ contact?.name }}</h1>
+            <img src="{{ contact?.imageUrl }}">
             <div class="btn-group pull-right">
             <a class="btn btn-primary" [routerLink]="['edit']">
             Edit
@@ -32,12 +32,12 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        Email: {{ contact.email }}
+        Email: {{ contact?.email }}
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        Phone: {{ contact.phone }}
+        Phone: {{ contact?.phone }}
     </div>
 </div>
 </div>
